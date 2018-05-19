@@ -1,6 +1,5 @@
 package es.cesfuencarral.fuenflixapi.controller;
 
-
 import es.cesfuencarral.fuenflixapi.controller.request.LoginRequest;
 import es.cesfuencarral.fuenflixapi.controller.request.UserRequest;
 import es.cesfuencarral.fuenflixapi.controller.response.LoginResponse;
@@ -18,14 +17,13 @@ import java.util.logging.Logger;
 
 @RestController
 public class UserController {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
 
 	@Autowired
-    private UserService userService;
+	private UserService userService;
 
-
-	/*Access: All users*/
+	/* Access: All users */
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -36,42 +34,39 @@ public class UserController {
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
-            LOGGER.log(Level.SEVERE, "UserController.generateBilling exception " + e.getMessage());
+			LOGGER.log(Level.SEVERE, "UserController.generateBilling exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		}
 	}
-
-
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ResponseEntity<LoginResponse> logout() {
 		try {
 
-			LOGGER.log(Level.INFO, "UserController.logout start: " );
+			LOGGER.log(Level.INFO, "UserController.logout start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "UserController.logout exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ResponseEntity<ProfileResponse> getProfile() {
 		try {
 
-			LOGGER.log(Level.INFO, "UserController.getProfile start: " );
+			LOGGER.log(Level.INFO, "UserController.getProfile start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "UserController.getProfile exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -83,28 +78,28 @@ public class UserController {
 	public ResponseEntity<Object> editProfile(@RequestBody LoginRequest request) {
 		try {
 
-			LOGGER.log(Level.INFO, "UserController.editProfile start: " );
+			LOGGER.log(Level.INFO, "UserController.editProfile start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "UserController.editProfile exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	/*Access only superAdmin*/
+	/* Access : Admin only */
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.POST)
-	public ResponseEntity<Object> editUser(@RequestBody UserRequest request,@RequestParam(value = "id") String user) {
+	public ResponseEntity<Object> editUser(@RequestBody UserRequest request, @RequestParam(value = "id") String user) {
 		try {
 
-			LOGGER.log(Level.INFO, "UserController.editUser start: " );
+			LOGGER.log(Level.INFO, "UserController.editUser start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "UserController.editUser exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -116,11 +111,11 @@ public class UserController {
 	public ResponseEntity<Object> addUser(@RequestBody UserRequest request) {
 		try {
 
-			LOGGER.log(Level.INFO, "UserController.addUser start: " );
+			LOGGER.log(Level.INFO, "UserController.addUser start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "UserController.addUser exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -132,11 +127,11 @@ public class UserController {
 	public ResponseEntity<List<UserResponse>> getUsers() {
 		try {
 
-			LOGGER.log(Level.INFO, "UserController.addUser start: " );
+			LOGGER.log(Level.INFO, "UserController.addUser start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "UserController.addUser exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -148,11 +143,11 @@ public class UserController {
 	public ResponseEntity<Object> deleteUser(@RequestParam(value = "id") String user) {
 		try {
 
-			LOGGER.log(Level.INFO, "UserController.deleteUser start: " );
+			LOGGER.log(Level.INFO, "UserController.deleteUser start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "UserController.deleteUser exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

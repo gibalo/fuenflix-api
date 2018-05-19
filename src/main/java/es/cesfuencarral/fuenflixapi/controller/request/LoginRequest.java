@@ -1,40 +1,38 @@
 package es.cesfuencarral.fuenflixapi.controller.request;
 
 public class LoginRequest {
-    /*fields*/
-    private String username;
-    private String password;
 
-    /*getters & setters*/
+	/* fields */
+	private String username;
+	private String password;
 
-    public String getUsername() {
-        return username;
-    }
+	/* getters & setters */
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    /*constructor*/
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public LoginRequest() {
-    }
+	/* constructor */
 
-    /*other*/
+	public LoginRequest() {
+	}
 
-    @Override
-    public String toString() {
-        return "LoginRequest{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
+	/* other */
+
+	@Override
+	public String toString() {
+		return "LoginRequest{" + "username='" + username + '\'' + ", password='" + password + '\'' + '}';
+	}
 }

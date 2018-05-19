@@ -1,6 +1,5 @@
 package es.cesfuencarral.fuenflixapi.controller;
 
-
 import es.cesfuencarral.fuenflixapi.controller.request.ContentFilterRequest;
 import es.cesfuencarral.fuenflixapi.controller.request.ContentRequest;
 import es.cesfuencarral.fuenflixapi.controller.response.ContentResponse;
@@ -16,22 +15,22 @@ import java.util.logging.Logger;
 
 @RestController
 public class ContentController {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(ContentController.class.getName());
 
 	@Autowired
-    private ContentService contentService;
+	private ContentService contentService;
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/content/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Object> edit(@RequestBody ContentRequest request, @RequestParam(value = "id") String user) {
 		try {
 
-			LOGGER.log(Level.INFO, "ContentController.edit start: " );
+			LOGGER.log(Level.INFO, "ContentController.edit start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "ContentController.edit exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -43,11 +42,11 @@ public class ContentController {
 	public ResponseEntity<Object> add(@RequestBody ContentRequest request) {
 		try {
 
-			LOGGER.log(Level.INFO, "ContentController.add start: " );
+			LOGGER.log(Level.INFO, "ContentController.add start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "ContentController.add exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -59,11 +58,11 @@ public class ContentController {
 	public ResponseEntity<List<ContentResponse>> getAll() {
 		try {
 
-			LOGGER.log(Level.INFO, "ContentController.getAll start: " );
+			LOGGER.log(Level.INFO, "ContentController.getAll start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "ContentController.getAll exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -75,29 +74,27 @@ public class ContentController {
 	public ResponseEntity<List<ContentResponse>> getAllByFilter(@RequestBody ContentFilterRequest request) {
 		try {
 
-			LOGGER.log(Level.INFO, "ContentController.getAllByFilter start: " );
+			LOGGER.log(Level.INFO, "ContentController.getAllByFilter start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "ContentController.getAllByFilter exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-
-
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/content/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@RequestParam(value = "id") String user) {
 		try {
 
-			LOGGER.log(Level.INFO, "ContentController.delete start: " );
+			LOGGER.log(Level.INFO, "ContentController.delete start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "ContentController.delete exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

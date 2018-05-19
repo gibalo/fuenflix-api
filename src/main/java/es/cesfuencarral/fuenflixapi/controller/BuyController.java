@@ -1,6 +1,5 @@
 package es.cesfuencarral.fuenflixapi.controller;
 
-
 import es.cesfuencarral.fuenflixapi.controller.request.BuyRequest;
 import es.cesfuencarral.fuenflixapi.service.BuyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,11 @@ import java.util.logging.Logger;
 
 @RestController
 public class BuyController {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(BuyController.class.getName());
 
 	@Autowired
-    private BuyService buyService;
+	private BuyService buyService;
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
@@ -28,10 +27,10 @@ public class BuyController {
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
-		} catch(NoSuchMethodError | Exception e) {
+		} catch (NoSuchMethodError | Exception e) {
 
-            LOGGER.log(Level.SEVERE, "BuyController.buyContent exception " + e.getMessage());
+			LOGGER.log(Level.SEVERE, "BuyController.buyContent exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+		}
 	}
 }

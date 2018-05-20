@@ -33,6 +33,15 @@ public class Payment implements Serializable {
 	public Payment() {
 	}
 
+	
+	public Payment(double rate, Date buyingDate, User user, Content content) {
+		this.rate = rate;
+		this.buyingDate = buyingDate;
+		this.user = user;
+		this.content = content;
+	}
+
+
 	/* Getters & setters */
 
 	public long getId() {

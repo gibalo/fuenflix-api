@@ -24,7 +24,7 @@ public class ContentController {
 	private ContentService contentService;
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/contentkk/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/content/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Object> edit(@RequestBody ContentRequest request, @PathVariable (value = "id") long content) {
 		try {
 

@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
 @RestController
 public class ContentController {
 
@@ -25,10 +23,10 @@ public class ContentController {
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/content/{id}", method = RequestMethod.POST)
-	public ResponseEntity<Object> edit(@RequestBody ContentRequest request, @PathVariable (value = "id") long content) {
+	public ResponseEntity<Object> edit(@RequestBody ContentRequest request, @PathVariable(value = "id") long content) {
 		try {
 
-			LOGGER.log(Level.INFO, "ContentController.edit start: "+content);
+			LOGGER.log(Level.INFO, "ContentController.edit start: " + content);
 
 			contentService.edit(content, request);
 
@@ -47,7 +45,7 @@ public class ContentController {
 		try {
 
 			LOGGER.log(Level.INFO, "ContentController.add started ");
-			
+
 			contentService.add(request);
 
 			LOGGER.log(Level.INFO, "ContentController.add finished ");
@@ -67,6 +65,8 @@ public class ContentController {
 
 			LOGGER.log(Level.INFO, "ContentController.getAll start: ");
 
+			contentService.getAll();
+			/* TODO return */
 			return new ResponseEntity<>(HttpStatus.OK);
 
 		} catch (NoSuchMethodError | Exception e) {
@@ -80,9 +80,12 @@ public class ContentController {
 	@RequestMapping(value = "/content/filter", method = RequestMethod.GET)
 	public ResponseEntity<List<ContentResponse>> getAllByFilter(@RequestBody ContentFilterRequest request) {
 		try {
-
+		
 			LOGGER.log(Level.INFO, "ContentController.getAllByFilter start: ");
 
+			contentService.getFiltered(request);
+
+			/* TODO return*/
 			return new ResponseEntity<>(HttpStatus.OK);
 
 		} catch (NoSuchMethodError | Exception e) {
@@ -96,7 +99,7 @@ public class ContentController {
 	@RequestMapping(value = "/content/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@RequestParam(value = "id") String user) {
 		try {
-
+			/* TODO */
 			LOGGER.log(Level.INFO, "ContentController.delete start: ");
 
 			return new ResponseEntity<>(HttpStatus.OK);

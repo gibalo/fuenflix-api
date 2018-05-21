@@ -5,13 +5,11 @@ import javax.persistence.*;
 import es.cesfuencarral.fuenflixapi.controller.request.ContentRequest;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 @Entity
 @Table(name = "content")
-// @NamedQueries({
-// @NamedQuery(name = ".", query = "")
-// })
+@NamedQueries({
+		@NamedQuery(name = "Content.findByFilter", query = "SELECT c FROM Content c WHERE c.contentType = :contentType") })
 public class Content implements Serializable {
 
 	/* Fields */
@@ -41,10 +39,10 @@ public class Content implements Serializable {
 
 	public Content(ContentType contentType, ContentRequest request) {
 		this.contentType = contentType;
-		this.name= request.getName();
+		this.name = request.getName();
 		this.description = request.getDescription();
-		this.price=request.getPrice();
-		this.path= request.getPath();
+		this.price = request.getPrice();
+		this.path = request.getPath();
 		this.imagePath = request.getImagePath();
 	}
 
@@ -117,11 +115,11 @@ public class Content implements Serializable {
 
 	public void update(ContentType contentType, ContentRequest request) {
 		this.contentType = contentType;
-		this.name= request.getName();
+		this.name = request.getName();
 		this.description = request.getDescription();
-		this.price=request.getPrice();
-		this.path= request.getPath();
+		this.price = request.getPrice();
+		this.path = request.getPath();
 		this.imagePath = request.getImagePath();
-		
+
 	}
 }

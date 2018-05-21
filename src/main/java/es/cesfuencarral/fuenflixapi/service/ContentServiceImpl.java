@@ -1,5 +1,6 @@
 package es.cesfuencarral.fuenflixapi.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -7,6 +8,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import es.cesfuencarral.fuenflixapi.controller.request.ContentFilterRequest;
 import es.cesfuencarral.fuenflixapi.controller.request.ContentRequest;
 import es.cesfuencarral.fuenflixapi.persistence.entity.Content;
 import es.cesfuencarral.fuenflixapi.persistence.entity.ContentType;
@@ -37,7 +39,7 @@ public class ContentServiceImpl implements ContentService {
 
 				contentRepository.save(contentAux.get());
 				LOGGER.log(Level.INFO, "ContentServiceImpl.edit Edit OK");
-			}else {
+			} else {
 				LOGGER.log(Level.INFO, "ContentServiceImpl.edit Edit ERROR : Content Type NOT FOUND.");
 			}
 
@@ -56,7 +58,7 @@ public class ContentServiceImpl implements ContentService {
 			if (contentTypeAux.isPresent()) {
 				contentRepository.save(new Content(contentTypeAux.get(), request));
 				LOGGER.log(Level.INFO, "ContentServiceImpl.add Insert OK");
-			}else {
+			} else {
 				LOGGER.log(Level.INFO, "ContentServiceImpl.add Insert ERROR : Content Type NOT FOUND.");
 			}
 
@@ -72,14 +74,31 @@ public class ContentServiceImpl implements ContentService {
 	}
 
 	@Override
-	public void getAll() {
-		// TODO Auto-generated method stub
+	public List<Content> getAll() {
+		try {
+			LOGGER.log(Level.INFO, "ContentServiceImpl.getAll OK");
+
+			return contentRepository.findAll();
+
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "ContentServiceImpl.getAll ERROR : " + e.getLocalizedMessage());
+			return null;
+		}
 
 	}
 
 	@Override
-	public void getFiltered() {
+	public List<Content> getFiltered(ContentFilterRequest request) {
 		// TODO Auto-generated method stub
+		try {
+			LOGGER.log(Level.INFO, "ContentServiceImpl.getAll OK");
 
+			//contentRepository.findByFilter(request.getContentType());
+			return null;
+
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "ContentServiceImpl.getAll ERROR : " + e.getLocalizedMessage());
+			return null;
+		}
 	}
 }

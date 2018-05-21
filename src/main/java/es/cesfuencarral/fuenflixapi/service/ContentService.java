@@ -1,6 +1,10 @@
 package es.cesfuencarral.fuenflixapi.service;
 
+import java.util.List;
+
+import es.cesfuencarral.fuenflixapi.controller.request.ContentFilterRequest;
 import es.cesfuencarral.fuenflixapi.controller.request.ContentRequest;
+import es.cesfuencarral.fuenflixapi.persistence.entity.Content;
 
 public interface ContentService {
 
@@ -10,7 +14,7 @@ public interface ContentService {
 
 	void delete();
 
-	void getAll();
+	List<Content> getAll();
 
-	void getFiltered();
+	List<Content> getFiltered(ContentFilterRequest request);
 }

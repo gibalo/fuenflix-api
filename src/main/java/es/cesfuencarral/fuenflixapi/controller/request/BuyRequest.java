@@ -1,31 +1,19 @@
 package es.cesfuencarral.fuenflixapi.controller.request;
 
-import es.cesfuencarral.fuenflixapi.persistence.entity.Content;
-import es.cesfuencarral.fuenflixapi.persistence.entity.User;
-
 public class BuyRequest {
 
-	private User user;
-	private Content content;
+	private long content;
 	private double rate;
 
 	public BuyRequest() {
 
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Content getContent() {
+	public long getContent() {
 		return content;
 	}
 
-	public void setContent(Content content) {
+	public void setContent(long content) {
 		this.content = content;
 	}
 
@@ -36,5 +24,7 @@ public class BuyRequest {
 	public void setRate(double rate) {
 		this.rate = rate;
 	}
+
+	
 
 }

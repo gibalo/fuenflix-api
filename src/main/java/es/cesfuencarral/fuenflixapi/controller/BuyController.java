@@ -25,13 +25,17 @@ public class BuyController {
 
 			LOGGER.log(Level.INFO, "BuyController.buyContent start: " + request.toString());
 
-			int ok = buyService.buyContentByUser(request);
+			/* TODO Autenticar */
+			long user = 1L;
+			/*-----------------*/
+			
+			int ok = buyService.buyContentByUser(user, request);
 
 			if (ok == 0) {
 				return new ResponseEntity<>(HttpStatus.OK);
 			} else {
-				// ??
-				return new ResponseEntity<>(HttpStatus.OK);
+				// Si no se ha podido generar la compra
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 
 		} catch (NoSuchMethodError | Exception e) {

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+
 @RestController
 public class ContentController {
 
@@ -22,11 +24,13 @@ public class ContentController {
 	private ContentService contentService;
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/content/{id}", method = RequestMethod.POST)
-	public ResponseEntity<Object> edit(@RequestBody ContentRequest request, @RequestParam(value = "id") String user) {
+	@RequestMapping(value = "/contentkk/{id}", method = RequestMethod.POST)
+	public ResponseEntity<Object> edit(@RequestBody ContentRequest request, @PathVariable (value = "id") long content) {
 		try {
 
-			LOGGER.log(Level.INFO, "ContentController.edit start: ");
+			LOGGER.log(Level.INFO, "ContentController.edit start: "+content);
+
+			contentService.edit(content, request);
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
@@ -42,8 +46,11 @@ public class ContentController {
 	public ResponseEntity<Object> add(@RequestBody ContentRequest request) {
 		try {
 
-			LOGGER.log(Level.INFO, "ContentController.add start: ");
+			LOGGER.log(Level.INFO, "ContentController.add started ");
+			
+			contentService.add(request);
 
+			LOGGER.log(Level.INFO, "ContentController.add finished ");
 			return new ResponseEntity<>(HttpStatus.OK);
 
 		} catch (NoSuchMethodError | Exception e) {

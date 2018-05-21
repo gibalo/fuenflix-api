@@ -1,7 +1,11 @@
 package es.cesfuencarral.fuenflixapi.persistence.entity;
 
 import javax.persistence.*;
+
+import es.cesfuencarral.fuenflixapi.controller.request.ContentRequest;
+
 import java.io.Serializable;
+import java.util.Optional;
 
 @Entity
 @Table(name = "content")
@@ -34,6 +38,15 @@ public class Content implements Serializable {
 	}
 
 	/* Getters & setters */
+
+	public Content(ContentType contentType, ContentRequest request) {
+		this.contentType = contentType;
+		this.name= request.getName();
+		this.description = request.getDescription();
+		this.price=request.getPrice();
+		this.path= request.getPath();
+		this.imagePath = request.getImagePath();
+	}
 
 	public long getId() {
 		return id;
@@ -100,5 +113,15 @@ public class Content implements Serializable {
 	@Override
 	public String toString() {
 		return " id=" + id + " ]";
+	}
+
+	public void update(ContentType contentType, ContentRequest request) {
+		this.contentType = contentType;
+		this.name= request.getName();
+		this.description = request.getDescription();
+		this.price=request.getPrice();
+		this.path= request.getPath();
+		this.imagePath = request.getImagePath();
+		
 	}
 }

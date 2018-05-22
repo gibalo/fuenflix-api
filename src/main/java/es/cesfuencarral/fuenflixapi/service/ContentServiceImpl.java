@@ -1,6 +1,5 @@
 package es.cesfuencarral.fuenflixapi.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -26,7 +25,7 @@ public class ContentServiceImpl implements ContentService {
 
 	@Autowired
 	private ContentRepository contentRepository;
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -100,18 +99,26 @@ public class ContentServiceImpl implements ContentService {
 
 			if (request.getUser() != -1) {
 				LOGGER.log(Level.INFO, "ContentServiceImpl.getFiltered By User : OK");
-				Optional<User> userAux=userRepository.findById(request.getUser());
+				Optional<User> userAux = userRepository.findById(request.getUser());
 
-				if(userAux.isPresent() && userAux.get().getContents()!=null && !userAux.get().getContents().isEmpty()) {
+				if (userAux.isPresent() && userAux.get().getContents() != null
+						&& !userAux.get().getContents().isEmpty()) {
+
+					// userAux.get().setContents(contentRepository.findByUserContent);
+					// return userAux.get().getContents().stream().collect(Collectors.toList());
+
+					// return contentRepository.findByUserContent(request.getUser());
+
+					List<Long> idList = userRepository.findContentsById(request.getUser()).stream()
+							.map(item -> item.getId()).collect(Collectors.toList());
 					
-					//userAux.get().setContents(contentRepository.findByUserContent);
-//					return userAux.get().getContents().stream().collect(Collectors.toList());
-					return userRepository.findContentsById(request.getUser());
-				}else {
+					return contentRepository.findByIdList(idList);
+
+				} else {
 					System.out.println("Lista null");
 					return null;
 				}
-							
+
 			} else {
 				LOGGER.log(Level.INFO, "ContentServiceImpl.getFiltered By Content Type : OK");
 				return contentRepository.findByContentType(request.getContentType());
@@ -119,7 +126,7 @@ public class ContentServiceImpl implements ContentService {
 
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "ContentServiceImpl.getFiltered ERROR : " + e.getLocalizedMessage());
-			
+
 		}
 		return null;
 	}

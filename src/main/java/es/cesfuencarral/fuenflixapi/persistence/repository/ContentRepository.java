@@ -17,7 +17,7 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
 	 *            ID
 	 * @return List<Content>
 	 */
-	Set<Content> findByUserContent(@Param("user") long user);
+	//List<Content> findByUserContent(@Param("user") long user);
 
 	/**
 	 * Returns a List<Content> filtering by ContentType
@@ -27,5 +27,7 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
 	 * @return List<Content>
 	 */
 	List<Content> findByContentType(@Param("contentType") long contentType);
+
+	List<Content> findByIdList(@Param("idList") List<Long> idList);
 
 }

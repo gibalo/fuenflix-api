@@ -113,15 +113,16 @@ public class ContentController {
 			LOGGER.log(Level.INFO, "ContentController.getAllByFilter start: ");
 
 			List<Content> content = contentService.getFiltered(request);
-			
-			if(!content.isEmpty() && content != null) {
-				return ResponseEntity.ok(contentService.getFiltered(request).stream()
-						.map(entity -> new ContentResponse(entity)).collect(Collectors.toList()));
-			}else {
+
+			if (!content.isEmpty() && content != null) {
+
+				return new ResponseEntity<List<ContentResponse>>(
+						content.stream().map(entity -> new ContentResponse(entity)).collect(Collectors.toList()),
+						HttpStatus.OK);
+			} else {
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
-			
-			
+
 		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "ContentController.getAllByFilter exception " + e.getMessage());

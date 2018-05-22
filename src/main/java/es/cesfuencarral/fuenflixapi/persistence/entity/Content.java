@@ -11,8 +11,10 @@ import java.util.Set;
 @Table(name = "content")
 @NamedQueries({
 		@NamedQuery(name = "Content.findByFilter", query = "SELECT c FROM Content c WHERE c.contentType = :contentType")
-		//,@NamedQuery(name = "Content.findByUserContent", query = "SELECT c FROM Content c WHERE c.id IN (SELECT p.content.id FROM Payment p WHERE p.user.id = :user)")
-		,@NamedQuery(name = "Content.findByContentType",query = "SELECT c FROM Content c WHERE c.contentType.id = :contentType")})
+		//,@NamedQuery(name = "Content.findByUserContent", query = "SELECT c FROM Content c JOIN User u ON c.user.id = :user WHERE c.id IN (SELECT u.contents FROM User u WHERE u.user = :user)")
+		,@NamedQuery(name = "Content.findByContentType",query = "SELECT c FROM Content c WHERE c.contentType.id = :contentType")
+		,@NamedQuery(name = "Content.findByIdList",query = "SELECT c FROM Content c WHERE c.id IN :idList")
+})
 public class Content implements Serializable {
 
 	/* Fields */
@@ -40,6 +42,8 @@ public class Content implements Serializable {
 	/* Constructors */
 	public Content() {
 	}
+	
+
 
 	/* Getters & setters */
 

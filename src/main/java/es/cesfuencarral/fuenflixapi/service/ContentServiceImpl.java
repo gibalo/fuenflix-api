@@ -1,9 +1,11 @@
 package es.cesfuencarral.fuenflixapi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,8 +14,10 @@ import es.cesfuencarral.fuenflixapi.controller.request.ContentFilterRequest;
 import es.cesfuencarral.fuenflixapi.controller.request.ContentRequest;
 import es.cesfuencarral.fuenflixapi.persistence.entity.Content;
 import es.cesfuencarral.fuenflixapi.persistence.entity.ContentType;
+import es.cesfuencarral.fuenflixapi.persistence.entity.User;
 import es.cesfuencarral.fuenflixapi.persistence.repository.ContentRepository;
 import es.cesfuencarral.fuenflixapi.persistence.repository.ContentTypeRepository;
+import es.cesfuencarral.fuenflixapi.persistence.repository.UserRepository;
 
 @Component
 public class ContentServiceImpl implements ContentService {
@@ -22,6 +26,9 @@ public class ContentServiceImpl implements ContentService {
 
 	@Autowired
 	private ContentRepository contentRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@Autowired
 	private ContentTypeRepository contentTypeRepository;
@@ -93,8 +100,17 @@ public class ContentServiceImpl implements ContentService {
 
 			if (request.getUser() != -1) {
 				LOGGER.log(Level.INFO, "ContentServiceImpl.getFiltered By User : OK");
-				return contentRepository.findByUserContent(request.getUser());
+				Optional<User> userAux=userRepository.findById(request.getUser());
 				
+				if(userAux.isPresent() && userAux.get().getContents()!=null && !userAux.get().getContents().isEmpty()) {
+					
+					//userAux.get().setContents(contentRepository.findByUserContent);
+					return userAux.get().getContents().stream().collect(Collectors.toList());
+				}else {
+					System.out.println("Lista null");
+					return null;
+				}
+							
 			} else {
 				LOGGER.log(Level.INFO, "ContentServiceImpl.getFiltered By Content Type : OK");
 				return contentRepository.findByContentType(request.getContentType());
@@ -102,7 +118,8 @@ public class ContentServiceImpl implements ContentService {
 
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "ContentServiceImpl.getFiltered ERROR : " + e.getLocalizedMessage());
-			return null;
+			
 		}
+		return null;
 	}
 }

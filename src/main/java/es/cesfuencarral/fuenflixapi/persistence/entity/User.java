@@ -3,6 +3,7 @@ package es.cesfuencarral.fuenflixapi.persistence.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -20,6 +21,8 @@ public class User implements Serializable {
 	private String password;
 	private String email;
 	private String address;
+	
+	
 
 	@Column(name = "birth_date")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -32,6 +35,10 @@ public class User implements Serializable {
 	@JoinColumn(name = "payment_account", referencedColumnName = "id")
 	@ManyToOne
 	private PaymentAccount paymentAccount;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "payment", joinColumns = @JoinColumn(name = "user", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "content", referencedColumnName = "id"))
+	private Set<Content> contents;
 
 	/* Constructors */
 	public User() {
@@ -109,6 +116,16 @@ public class User implements Serializable {
 
 	public void setPaymentAccount(PaymentAccount paymentAccount) {
 		this.paymentAccount = paymentAccount;
+	}
+
+	
+	
+	public Set<Content> getContents() {
+		return contents;
+	}
+
+	public void setContents(Set<Content> contents) {
+		this.contents = contents;
 	}
 
 	@Override

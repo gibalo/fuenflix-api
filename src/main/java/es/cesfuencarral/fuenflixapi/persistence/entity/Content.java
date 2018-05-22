@@ -5,12 +5,13 @@ import javax.persistence.*;
 import es.cesfuencarral.fuenflixapi.controller.request.ContentRequest;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "content")
 @NamedQueries({
 		@NamedQuery(name = "Content.findByFilter", query = "SELECT c FROM Content c WHERE c.contentType = :contentType")
-		,@NamedQuery(name = "Content.findByUserContent", query = "SELECT c FROM Content c WHERE c.id IN (SELECT p.content.id FROM Payment p WHERE p.user.id = :user)")
+		//,@NamedQuery(name = "Content.findByUserContent", query = "SELECT c FROM Content c WHERE c.id IN (SELECT p.content.id FROM Payment p WHERE p.user.id = :user)")
 		,@NamedQuery(name = "Content.findByContentType",query = "SELECT c FROM Content c WHERE c.contentType.id = :contentType")})
 public class Content implements Serializable {
 
@@ -32,6 +33,9 @@ public class Content implements Serializable {
 	@JoinColumn(name = "content_type", referencedColumnName = "id")
 	@ManyToOne
 	private ContentType contentType;
+	
+	@ManyToMany(mappedBy = "contents")
+	private Set<User> users;
 
 	/* Constructors */
 	public Content() {
@@ -102,6 +106,16 @@ public class Content implements Serializable {
 
 	public void setContentType(ContentType contentType) {
 		this.contentType = contentType;
+	}
+	
+	
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	/* others */

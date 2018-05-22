@@ -28,15 +28,19 @@ public class BuyController {
 			/* TODO Autenticar */
 			long user = 1L;
 			/*-----------------*/
-			
-			int ok = buyService.buyContentByUser(user, request);
 
-			if (ok == 0) {
+			int buy = buyService.buyContentByUser(user, request);
+
+			if (buy == 1) {
+				//Si la compra se ha realizado
 				return new ResponseEntity<>(HttpStatus.OK);
+
 			} else {
 				// Si no se ha podido generar la compra
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
+
+			
 
 		} catch (NoSuchMethodError | Exception e) {
 

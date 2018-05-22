@@ -3,6 +3,7 @@ package es.cesfuencarral.fuenflixapi.controller;
 import es.cesfuencarral.fuenflixapi.controller.request.ContentFilterRequest;
 import es.cesfuencarral.fuenflixapi.controller.request.ContentRequest;
 import es.cesfuencarral.fuenflixapi.controller.response.ContentResponse;
+import es.cesfuencarral.fuenflixapi.persistence.entity.Content;
 import es.cesfuencarral.fuenflixapi.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -111,9 +112,16 @@ public class ContentController {
 
 			LOGGER.log(Level.INFO, "ContentController.getAllByFilter start: ");
 
-			return ResponseEntity.ok(contentService.getFiltered(request).stream()
-					.map(entity -> new ContentResponse(entity)).collect(Collectors.toList()));
-
+			List<Content> content = contentService.getFiltered(request);
+			
+			if(!content.isEmpty() && content != null) {
+				return ResponseEntity.ok(contentService.getFiltered(request).stream()
+						.map(entity -> new ContentResponse(entity)).collect(Collectors.toList()));
+			}else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+			
+			
 		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "ContentController.getAllByFilter exception " + e.getMessage());

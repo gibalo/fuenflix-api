@@ -29,7 +29,7 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<Object> login(@RequestBody LoginRequest request) {
 		try {
-
+//TODO
 			LOGGER.log(Level.INFO, "UserController.generateBilling login: " + request.toString());
 
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -45,6 +45,7 @@ public class UserController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ResponseEntity<LoginResponse> logout() {
 		try {
+			//TODO
 
 			LOGGER.log(Level.INFO, "UserController.logout start: ");
 
@@ -63,7 +64,7 @@ public class UserController {
 		try {
 
 			LOGGER.log(Level.INFO, "UserController.getProfile start: ");
-
+			
 			return new ResponseEntity<>(HttpStatus.OK);
 
 		} catch (NoSuchMethodError | Exception e) {

@@ -89,15 +89,19 @@ public class ContentServiceImpl implements ContentService {
 
 	@Override
 	public List<Content> getFiltered(ContentFilterRequest request) {
-		// TODO Auto-generated method stub
 		try {
-			LOGGER.log(Level.INFO, "ContentServiceImpl.getAll OK");
 
-			//contentRepository.findByFilter(request.getContentType());
-			return null;
+			if (request.getUser() != -1) {
+				LOGGER.log(Level.INFO, "ContentServiceImpl.getFiltered By User : OK");
+				return contentRepository.findByUserContent(request.getUser());
+				
+			} else {
+				LOGGER.log(Level.INFO, "ContentServiceImpl.getFiltered By Content Type : OK");
+				return contentRepository.findByContentType(request.getContentType());
+			}
 
 		} catch (Exception e) {
-			LOGGER.log(Level.SEVERE, "ContentServiceImpl.getAll ERROR : " + e.getLocalizedMessage());
+			LOGGER.log(Level.SEVERE, "ContentServiceImpl.getFiltered ERROR : " + e.getLocalizedMessage());
 			return null;
 		}
 	}

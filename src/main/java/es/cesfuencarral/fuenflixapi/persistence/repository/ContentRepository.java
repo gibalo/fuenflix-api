@@ -9,5 +9,22 @@ import org.springframework.data.repository.query.Param;
 
 public interface ContentRepository extends JpaRepository<Content, Long> {
 
-	List<Content> findByFilter(@Param("contentType") long contentType);
+	/**
+	 * Returns a List<Content> filtering by user purchases
+	 * 
+	 * @param user
+	 *            ID
+	 * @return List<Content>
+	 */
+	List<Content> findByUserContent(@Param("user") long user);
+
+	/**
+	 * Returns a List<Content> filtering by ContentType
+	 * 
+	 * @param contentType
+	 *            ID
+	 * @return List<Content>
+	 */
+	List<Content> findByContentType(@Param("contentType") long contentType);
+
 }

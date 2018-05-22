@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @RestController
 public class ContentController {
@@ -23,6 +24,15 @@ public class ContentController {
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/content/{id}", method = RequestMethod.POST)
+	/**
+	 * Edits a Content
+	 * 
+	 * @param request
+	 *            JSON Input with ContentRequest fields
+	 * @param content
+	 *            Content ID
+	 * @return HttpStatus
+	 */
 	public ResponseEntity<Object> edit(@RequestBody ContentRequest request, @PathVariable(value = "id") long content) {
 		try {
 
@@ -41,6 +51,13 @@ public class ContentController {
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/content", method = RequestMethod.PUT)
+	/**
+	 * Adds new Content
+	 * 
+	 * @param request
+	 *            JSON Input with ContentRequest fields.
+	 * @return HttpStatus
+	 */
 	public ResponseEntity<Object> add(@RequestBody ContentRequest request) {
 		try {
 
@@ -60,14 +77,18 @@ public class ContentController {
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/content", method = RequestMethod.GET)
+	/**
+	 * Returns all the contents on the DB
+	 * 
+	 * @return List<ContentResponse>
+	 */
 	public ResponseEntity<List<ContentResponse>> getAll() {
 		try {
 
-			LOGGER.log(Level.INFO, "ContentController.getAll start: ");
+			LOGGER.log(Level.INFO, "ContentController.getAll started.");
 
-			contentService.getAll();
-			/* TODO return */
-			return new ResponseEntity<>(HttpStatus.OK);
+			return ResponseEntity.ok(contentService.getAll().stream().map(entity -> new ContentResponse(entity))
+					.collect(Collectors.toList()));
 
 		} catch (NoSuchMethodError | Exception e) {
 
@@ -77,16 +98,21 @@ public class ContentController {
 	}
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/content/filter", method = RequestMethod.GET)
+	@RequestMapping(value = "/content/filter", method = RequestMethod.POST)
+	/**
+	 * Returns a filtered list by User purchases or ContentType
+	 * 
+	 * @param request
+	 *            JSON Input with ContentFilterRequest fields
+	 * @return List<Content>
+	 */
 	public ResponseEntity<List<ContentResponse>> getAllByFilter(@RequestBody ContentFilterRequest request) {
 		try {
-		
+
 			LOGGER.log(Level.INFO, "ContentController.getAllByFilter start: ");
 
-			contentService.getFiltered(request);
-
-			/* TODO return*/
-			return new ResponseEntity<>(HttpStatus.OK);
+			return ResponseEntity.ok(contentService.getFiltered(request).stream()
+					.map(entity -> new ContentResponse(entity)).collect(Collectors.toList()));
 
 		} catch (NoSuchMethodError | Exception e) {
 
@@ -95,19 +121,23 @@ public class ContentController {
 		}
 	}
 
-	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/content/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> delete(@RequestParam(value = "id") String user) {
-		try {
-			/* TODO */
-			LOGGER.log(Level.INFO, "ContentController.delete start: ");
-
-			return new ResponseEntity<>(HttpStatus.OK);
-
-		} catch (NoSuchMethodError | Exception e) {
-
-			LOGGER.log(Level.SEVERE, "ContentController.delete exception " + e.getMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+	/*
+	 * TODO
+	 * 
+	 * @CrossOrigin(origins = "*")
+	 * 
+	 * @RequestMapping(value = "/content/{id}", method = RequestMethod.DELETE)
+	 * public ResponseEntity<Object> delete(@RequestParam(value = "id") String user)
+	 * { try {
+	 * 
+	 * LOGGER.log(Level.INFO, "ContentController.delete start: ");
+	 * 
+	 * return new ResponseEntity<>(HttpStatus.OK);
+	 * 
+	 * } catch (NoSuchMethodError | Exception e) {
+	 * 
+	 * LOGGER.log(Level.SEVERE, "ContentController.delete exception " +
+	 * e.getMessage()); return new
+	 * ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); } }
+	 */
 }

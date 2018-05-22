@@ -101,11 +101,12 @@ public class ContentServiceImpl implements ContentService {
 			if (request.getUser() != -1) {
 				LOGGER.log(Level.INFO, "ContentServiceImpl.getFiltered By User : OK");
 				Optional<User> userAux=userRepository.findById(request.getUser());
-				
+
 				if(userAux.isPresent() && userAux.get().getContents()!=null && !userAux.get().getContents().isEmpty()) {
 					
 					//userAux.get().setContents(contentRepository.findByUserContent);
-					return userAux.get().getContents().stream().collect(Collectors.toList());
+//					return userAux.get().getContents().stream().collect(Collectors.toList());
+					return userRepository.findContentsById(request.getUser());
 				}else {
 					System.out.println("Lista null");
 					return null;

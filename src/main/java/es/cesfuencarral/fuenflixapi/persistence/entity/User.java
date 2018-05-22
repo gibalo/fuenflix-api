@@ -7,7 +7,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-
+@NamedQueries({
+		@NamedQuery(name = "User.findContentsById", query = "SELECT u.contents FROM User u WHERE u.id = :id")
+})
 public class User implements Serializable {
 
 	/* Fields */

@@ -39,11 +39,7 @@ public class BuyController {
 				// Si no se ha podido generar la compra
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
-
-			
-
 		} catch (NoSuchMethodError | Exception e) {
-
 			LOGGER.log(Level.SEVERE, "BuyController.buyContent exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

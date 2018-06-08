@@ -29,14 +29,14 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<Object> login(@RequestBody LoginRequest request) {
 		try {
-//TODO
-			LOGGER.log(Level.INFO, "UserController.generateBilling login: " + request.toString());
+			// TODO
+			LOGGER.log(Level.INFO, "UserController.login login: " + request.toString());
 
 			return new ResponseEntity<>(HttpStatus.OK);
 
 		} catch (NoSuchMethodError | Exception e) {
 
-			LOGGER.log(Level.SEVERE, "UserController.generateBilling exception " + e.getMessage());
+			LOGGER.log(Level.SEVERE, "UserController.login exception " + e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -45,7 +45,7 @@ public class UserController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ResponseEntity<LoginResponse> logout() {
 		try {
-			//TODO
+			// TODO
 
 			LOGGER.log(Level.INFO, "UserController.logout start: ");
 
@@ -64,7 +64,7 @@ public class UserController {
 		try {
 
 			LOGGER.log(Level.INFO, "UserController.getProfile start: ");
-			
+
 			return new ResponseEntity<>(HttpStatus.OK);
 
 		} catch (NoSuchMethodError | Exception e) {

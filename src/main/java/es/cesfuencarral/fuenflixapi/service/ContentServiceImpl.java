@@ -21,7 +21,7 @@ import es.cesfuencarral.fuenflixapi.persistence.repository.UserRepository;
 @Component
 public class ContentServiceImpl implements ContentService {
 
-	private static final Logger LOGGER = Logger.getLogger(BuyServiceImpl.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ContentServiceImpl.class.getName());
 
 	@Autowired
 	private ContentRepository contentRepository;

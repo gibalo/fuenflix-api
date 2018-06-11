@@ -1,10 +1,13 @@
 package es.cesfuencarral.fuenflixapi.controller;
 
+import es.cesfuencarral.fuenflixapi.controller.request.ContentFilterRequest;
 import es.cesfuencarral.fuenflixapi.controller.request.LoginRequest;
 import es.cesfuencarral.fuenflixapi.controller.request.UserRequest;
+import es.cesfuencarral.fuenflixapi.controller.response.ContentResponse;
 import es.cesfuencarral.fuenflixapi.controller.response.LoginResponse;
 import es.cesfuencarral.fuenflixapi.controller.response.ProfileResponse;
 import es.cesfuencarral.fuenflixapi.controller.response.UserResponse;
+import es.cesfuencarral.fuenflixapi.persistence.entity.User;
 import es.cesfuencarral.fuenflixapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @RestController
 public class UserController {
@@ -59,13 +63,15 @@ public class UserController {
 	}
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public ResponseEntity<ProfileResponse> getProfile() {
+	@RequestMapping(value = "/profile/{id}", method = RequestMethod.POST)
+	public ResponseEntity<ProfileResponse> getProfile(@RequestBody long id) {
 		try {
 
 			LOGGER.log(Level.INFO, "UserController.getProfile start: ");
 
-			return new ResponseEntity<>(HttpStatus.OK);
+			ProfileResponse profile = new ProfileResponse(userService.getProfile(id));
+
+			return new ResponseEntity<ProfileResponse>(profile, HttpStatus.OK);
 
 		} catch (NoSuchMethodError | Exception e) {
 

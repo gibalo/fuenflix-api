@@ -1,7 +1,6 @@
 package es.cesfuencarral.fuenflixapi.controller.response;
 
 import es.cesfuencarral.fuenflixapi.persistence.entity.Content;
-import es.cesfuencarral.fuenflixapi.persistence.entity.ContentType;
 
 public class ContentResponse {
 

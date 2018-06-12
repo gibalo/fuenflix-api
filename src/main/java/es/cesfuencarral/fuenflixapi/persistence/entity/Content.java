@@ -51,7 +51,7 @@ public class Content implements Serializable {
 		this.contentType = contentType;
 		this.name = request.getName();
 		this.description = request.getDescription();
-		this.price = request.getPrice();
+		//this.price = request.getPrice();
 		this.path = request.getPath();
 		this.imagePath = request.getImagePath();
 	}
@@ -137,7 +137,7 @@ public class Content implements Serializable {
 		this.contentType = contentType;
 		this.name = request.getName();
 		this.description = request.getDescription();
-		this.price = request.getPrice();
+		//this.price = request.getPrice();
 		this.path = request.getPath();
 		this.imagePath = request.getImagePath();
 

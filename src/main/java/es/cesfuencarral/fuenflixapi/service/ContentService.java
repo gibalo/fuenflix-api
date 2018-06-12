@@ -12,7 +12,7 @@ public interface ContentService {
 
 	void add(ContentRequest request);
 
-	void delete();
+	void delete(long id);
 
 	List<Content> getAll();
 

@@ -130,23 +130,24 @@ public class ContentController {
 		}
 	}
 
-	/*
-	 * TODO
-	 * 
-	 * @CrossOrigin(origins = "*")
-	 * 
-	 * @RequestMapping(value = "/content/{id}", method = RequestMethod.DELETE)
-	 * public ResponseEntity<Object> delete(@RequestParam(value = "id") String user)
-	 * { try {
-	 * 
-	 * LOGGER.log(Level.INFO, "ContentController.delete start: ");
-	 * 
-	 * return new ResponseEntity<>(HttpStatus.OK);
-	 * 
-	 * } catch (NoSuchMethodError | Exception e) {
-	 * 
-	 * LOGGER.log(Level.SEVERE, "ContentController.delete exception " +
-	 * e.getMessage()); return new
-	 * ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); } }
-	 */
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/content/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> delete(@PathVariable(value="id") long id) {
+
+		try {
+
+			LOGGER.log(Level.INFO, "ContentController.delete start: ");
+			
+			contentService.delete(id);
+
+			LOGGER.log(Level.INFO, "ContentController.delete finish ");
+			return new ResponseEntity<>(HttpStatus.OK);
+
+		} catch (NoSuchMethodError | Exception e) {
+
+			LOGGER.log(Level.SEVERE, "ContentController.delete exception " + e.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 }

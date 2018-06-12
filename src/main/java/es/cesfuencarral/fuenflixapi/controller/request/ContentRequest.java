@@ -5,13 +5,14 @@ public class ContentRequest {
 	private String name;
 	private String description;
 	private long contentType;
-	private double price;
+	//private double price;
 	private String path;
 	private String imagePath;
 
 	/* Constructor */
 	public ContentRequest() {
 	}
+	
 
 	/* Getters & Setters */
 	public String getName() {
@@ -38,13 +39,13 @@ public class ContentRequest {
 		this.contentType = contentType;
 	}
 
-	public double getPrice() {
+	/*public double getPrice() {
 		return price;
 	}
 
 	public void setPrice(double price) {
 		this.price = price;
-	}
+	}*/
 
 	public String getPath() {
 		return path;
@@ -66,6 +67,6 @@ public class ContentRequest {
 	@Override
 	public String toString() {
 		return "ContentRequest [name=" + name + ", description=" + description + ", contentType=" + contentType
-				+ ", price=" + price + ", path=" + path + ", imagePath=" + imagePath + "]";
+				+ ", price=" + ", path=" + path + ", imagePath=" + imagePath + "]";
 	}
 }

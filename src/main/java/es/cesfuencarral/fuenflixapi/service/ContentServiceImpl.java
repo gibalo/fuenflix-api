@@ -74,8 +74,16 @@ public class ContentServiceImpl implements ContentService {
 	}
 
 	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
+	public void delete(long id) {
+
+		try {
+
+			contentRepository.deleteById(id);
+			LOGGER.log(Level.INFO, "ContentServiceImpl.add DELETE OK");
+
+		} catch (Exception e) {
+			LOGGER.log(Level.SEVERE, "ContentServiceImpl.add ERROR : " + e.getLocalizedMessage());
+		}
 
 	}
 
@@ -111,7 +119,7 @@ public class ContentServiceImpl implements ContentService {
 
 					List<Long> idList = userRepository.findContentsById(request.getUser()).stream()
 							.map(item -> item.getId()).collect(Collectors.toList());
-					
+
 					return contentRepository.findByIdList(idList);
 
 				} else {

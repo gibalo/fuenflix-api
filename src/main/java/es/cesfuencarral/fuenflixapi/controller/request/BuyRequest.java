@@ -3,7 +3,7 @@ package es.cesfuencarral.fuenflixapi.controller.request;
 public class BuyRequest {
 
 	private long content;
-	private double rate;
+	private String user;
 
 	public BuyRequest() {
 
@@ -17,12 +17,12 @@ public class BuyRequest {
 		this.content = content;
 	}
 
-	public double getRate() {
-		return rate;
+	public String getUser() {
+		return user;
 	}
 
-	public void setRate(double rate) {
-		this.rate = rate;
+	public void setUser(String user) {
+		this.user = user;
 	}
 
 	

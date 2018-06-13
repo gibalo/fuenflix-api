@@ -105,23 +105,19 @@ public class ContentServiceImpl implements ContentService {
 	public List<Content> getFiltered(ContentFilterRequest request) {
 		try {
 
-			if (request.getUser() != -1) {
+			if (request.getUser() != null) {
 				LOGGER.log(Level.INFO, "ContentServiceImpl.getFiltered By User : OK");
-				Optional<User> userAux = userRepository.findById(request.getUser());
+				Optional<User> userAux = userRepository.findByUsername(request.getUser());
 
-				if (userAux.isPresent() && userAux.get().getContents() != null
-						&& !userAux.get().getContents().isEmpty()) {
-
-					// userAux.get().setContents(contentRepository.findByUserContent);
-					// return userAux.get().getContents().stream().collect(Collectors.toList());
-
-					// return contentRepository.findByUserContent(request.getUser());
-
-					List<Long> idList = userRepository.findContentsById(request.getUser()).stream()
+				if (userAux.isPresent()) {
+					List<Long> idList = userRepository.findContentsById(userAux.get().getId()).stream()
 							.map(item -> item.getId()).collect(Collectors.toList());
 
-					return contentRepository.findByIdList(idList);
-
+					if (idList != null) {
+						return contentRepository.findByIdList(idList);
+					} else {
+						return null;
+					}
 				} else {
 					System.out.println("Lista null");
 					return null;

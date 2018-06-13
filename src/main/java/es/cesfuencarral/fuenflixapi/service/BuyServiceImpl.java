@@ -11,6 +11,7 @@ import es.cesfuencarral.fuenflixapi.persistence.repository.UserRepository;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Level;
@@ -28,11 +29,11 @@ public class BuyServiceImpl implements BuyService {
 	ContentRepository contentRepository;
 
 	@Override
-	public int buyContentByUser(long user, BuyRequest request) {
+	public int buyContentByUser(BuyRequest request) {
 
 		try {
 
-			Optional<User> userAux = userRepository.findById(user);
+			Optional<User> userAux = userRepository.findByUsername(request.getUser());
 
 			Optional<Content> contentAux = contentRepository.findById(request.getContent());
 

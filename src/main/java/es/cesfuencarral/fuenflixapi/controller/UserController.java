@@ -31,13 +31,18 @@ public class UserController {
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<Object> login(@RequestBody LoginRequest request) {
+	public ResponseEntity<UserResponse> login(@RequestBody LoginRequest request) {
 		try {
-			// TODO
 			LOGGER.log(Level.INFO, "UserController.login login: " + request.toString());
 
-			return new ResponseEntity<>(HttpStatus.OK);
-
+			UserResponse userResponse = userService.login(request);
+			
+			if(userResponse.getUsername() != null) {
+				return ResponseEntity.ok(userResponse);
+			}else {
+				return new ResponseEntity<UserResponse>(HttpStatus.NOT_FOUND);
+			}
+			
 		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "UserController.login exception " + e.getMessage());
@@ -63,13 +68,13 @@ public class UserController {
 	}
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/profile/{id}", method = RequestMethod.POST)
-	public ResponseEntity<ProfileResponse> getProfile(@RequestBody long id) {
+	@RequestMapping(value = "/profile/{username}", method = RequestMethod.GET)
+	public ResponseEntity<ProfileResponse> getProfile(@PathVariable String username) {
 		try {
 
 			LOGGER.log(Level.INFO, "UserController.getProfile start: ");
 
-			ProfileResponse profile = new ProfileResponse(userService.getProfile(id));
+			ProfileResponse profile = new ProfileResponse(userService.getProfile(username));
 
 			return new ResponseEntity<ProfileResponse>(profile, HttpStatus.OK);
 
@@ -82,11 +87,12 @@ public class UserController {
 
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
-	public ResponseEntity<Object> editProfile(@RequestBody LoginRequest request) {
+	public ResponseEntity<Object> editProfile(@RequestBody UserRequest request) {
 		try {
 
 			LOGGER.log(Level.INFO, "UserController.editProfile start: ");
-
+			userService.editProfile(request);
+			
 			return new ResponseEntity<>(HttpStatus.OK);
 
 		} catch (NoSuchMethodError | Exception e) {
@@ -119,9 +125,13 @@ public class UserController {
 		try {
 
 			LOGGER.log(Level.INFO, "UserController.addUser start: ");
-
-			return new ResponseEntity<>(HttpStatus.OK);
-
+			
+			if(userService.register(request)) {
+				return new ResponseEntity<>(HttpStatus.OK);
+			}else {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+		
 		} catch (NoSuchMethodError | Exception e) {
 
 			LOGGER.log(Level.SEVERE, "UserController.addUser exception " + e.getMessage());

@@ -9,6 +9,7 @@ public class ProfileResponse {
 	private String username;
 	private String email;
 	private String address;
+	private String password;
 	
 	public ProfileResponse() {
 		
@@ -20,6 +21,7 @@ public class ProfileResponse {
 		this.username = user.getUsername();
 		this.email = user.getEmail();
 		this.address = user.getAddress();
+		this.password = user.getPassword();
 	}
 
 	public long getId() {
@@ -32,6 +34,14 @@ public class ProfileResponse {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setName(String name) {

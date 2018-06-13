@@ -24,12 +24,8 @@ public class BuyController {
 		try {
 
 			LOGGER.log(Level.INFO, "BuyController.buyContent start: " + request.toString());
-
-			/* TODO Autenticar */
-			long user = 1L;
-			/*-----------------*/
-
-			int buy = buyService.buyContentByUser(user, request);
+	
+			int buy = buyService.buyContentByUser(request);
 
 			if (buy == 1) {
 				//Si la compra se ha realizado

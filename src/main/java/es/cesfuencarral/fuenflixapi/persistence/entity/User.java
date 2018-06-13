@@ -1,6 +1,9 @@
 package es.cesfuencarral.fuenflixapi.persistence.entity;
 
 import javax.persistence.*;
+
+import es.cesfuencarral.fuenflixapi.controller.request.UserRequest;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -8,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 @NamedQueries({
-	//@NamedQuery(name = "User.findContentsById", query = "SELECT u.contents FROM User u WHERE u.id = :id")
+	@NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
 	@NamedQuery(name = "User.findContentsById", query = "SELECT c FROM User u JOIN u.contents c WHERE u.id = :id")
 
 	})
@@ -47,6 +50,22 @@ public class User implements Serializable {
 	/* Constructors */
 	public User() {
 	}
+
+	
+	public User(UserRequest entity) {
+
+		this.name = entity.getName();
+		this.username = entity.getUsername();
+		this.password = entity.getPassword();
+		this.email = entity.getEmail();
+		this.address = entity.getAddress();
+		this.birthDate = new Date();
+		this.profile = null;
+		this.paymentAccount = null;
+		this.contents = null;
+	}
+
+
 
 	/* Getters & setters */
 
@@ -122,7 +141,6 @@ public class User implements Serializable {
 		this.paymentAccount = paymentAccount;
 	}
 
-	
 	
 	public Set<Content> getContents() {
 		return contents;

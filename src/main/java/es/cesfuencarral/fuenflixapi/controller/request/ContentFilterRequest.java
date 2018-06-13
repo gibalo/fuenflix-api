@@ -3,13 +3,13 @@ package es.cesfuencarral.fuenflixapi.controller.request;
 public class ContentFilterRequest {
 
 	private long contentType;
-	private long user;
+	private String user;
 
 	public ContentFilterRequest() {
 
 	}
 
-	public ContentFilterRequest(long contentType, long user) {
+	public ContentFilterRequest(long contentType, String user) {
 		this.contentType = contentType;
 		this.user = user;
 	}
@@ -22,11 +22,11 @@ public class ContentFilterRequest {
 		this.contentType = contentType;
 	}
 
-	public long getUser() {
+	public String getUser() {
 		return user;
 	}
 
-	public void setUser(long user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 
